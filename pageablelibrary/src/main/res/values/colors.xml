@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6a65d8</color>
+    <color name="colorPrimaryDark">#6900ff</color>
+    <color name="colorAccent">#ffd700</color>
+
+    <!--标准色-->
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorText">#3e3e3e</color>
+
+    <color name="colorDecoration">#333333</color>
+    <color name="colorSwipeRefresh">@color/colorAccent</color>
+
+
+</resources>

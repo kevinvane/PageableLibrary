@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_vertical">16dp</dimen>
+    <dimen name="margin_horizontal">16dp</dimen>
+
+    <dimen name="margin_vertical_common">8dp</dimen>
+    <dimen name="margin_horizontal_common">8dp</dimen>
+
+
+    <dimen name="default_decoration_height">1dp</dimen>
+    <dimen name="default_decoration_margin">0dp</dimen>
+</resources>
