@@ -21,6 +21,8 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
     private View mRootView;
     SwipeRefreshLayout swipeLayout;
     protected abstract void requestNetData();
+    protected abstract int getPageCount();
+    protected abstract int getPageStart();
 
     public abstract PageBaseAdapter getAdapterInstance();
 

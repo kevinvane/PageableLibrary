@@ -28,7 +28,6 @@ public class PageBean implements Serializable {
     private int numberOfElements;
     private int size;
     private int number;
-    private List<?> content;
 
     public PageableBean getPageable() {
         return pageable;
@@ -102,13 +101,6 @@ public class PageBean implements Serializable {
         this.number = number;
     }
 
-    public List<?> getContent() {
-        return content;
-    }
-
-    public void setContent(List<?> content) {
-        this.content = content;
-    }
 
     public static class PageableBean {
         /**

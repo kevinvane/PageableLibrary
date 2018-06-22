@@ -13,9 +13,9 @@ public abstract class PageableFragment extends RecyclerFragment{
 
     private BottomOnScrollListener bottomListener;
 
-    public abstract void onLoadNextPage(int pageNext);
-    private final static int PAGE_SIZE = 20;
-    private final int PAGE_START = 0;
+    public abstract void onLoadNextPage(int pageNext,int pageCount);
+    //private final static int PAGE_SIZE = 20;
+    //private final int PAGE_START = 0;
 
     /**
      * 在加载完成数据的时候，检查是否还有下一页
@@ -36,12 +36,12 @@ public abstract class PageableFragment extends RecyclerFragment{
     }
     private void setBottomListener(){
 
-        bottomListener = new BottomOnScrollListener(getLinearLayoutManager(),PAGE_START,PAGE_SIZE) {
+        bottomListener = new BottomOnScrollListener(getLinearLayoutManager(),getPageStart(),getPageCount()) {
             @Override
             public void onBottomLoadMore(final int pagination, int pageSize) {
                 Log.i(TAG, "onBottomLoadMore: "+pagination);
                 if(isHasMore()){
-                    onLoadNextPage(pagination);
+                    onLoadNextPage(pagination,getPageCount());
                 }else{
                     Log.e(TAG, "onLoadMore: 没有更多了" );
                 }
@@ -59,14 +59,14 @@ public abstract class PageableFragment extends RecyclerFragment{
     }
     @Override
     protected void requestNetData() {
-        onLoadNextPage(PAGE_START);
+        onLoadNextPage(getPageStart(),getPageCount());
     }
 
 
     private void resetLoadMore(){
 
         setHasMore(true);
-        bottomListener.setPagination(PAGE_START);
+        bottomListener.setPagination(getPageStart());
     }
     private void loadComplete(){
 

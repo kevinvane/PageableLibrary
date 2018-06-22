@@ -14,10 +14,10 @@ public class SampleFragment extends PageableFragment {
    private SampleAdapter adapter;
 
     @Override
-    public void onLoadNextPage(int pageNext) {
+    public void onLoadNextPage(int pageNext, int pageCount) {
 
         List<Sample> data = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 5; i++) {
 
             Sample sample = new Sample();
             sample.setTitle("test"+pageNext);
@@ -27,7 +27,7 @@ public class SampleFragment extends PageableFragment {
         adapter.updateList(data);
 
         PageBean pb = new PageBean();
-        pb.setLast(pageNext == 5);
+        pb.setLast(pageNext == 0);
 
         onLoadMoreCheck(pb);
 
@@ -35,6 +35,15 @@ public class SampleFragment extends PageableFragment {
         disMissSwipeLayout();
     }
 
+    @Override
+    protected int getPageCount() {
+        return 20;
+    }
+
+    @Override
+    protected int getPageStart() {
+        return 0;
+    }
     @Override
     public PageBaseAdapter getAdapterInstance() {
         if(adapter == null){
