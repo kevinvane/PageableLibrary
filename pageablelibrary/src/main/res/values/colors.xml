@@ -9,7 +9,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorText">#3e3e3e</color>
 
-    <color name="colorDecoration">#333333</color>
+    <color name="colorDecoration">#f0f0f0</color>
     <color name="colorSwipeRefresh">@color/colorAccent</color>
 
 

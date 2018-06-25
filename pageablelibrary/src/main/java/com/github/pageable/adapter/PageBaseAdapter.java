@@ -1,8 +1,11 @@
 package com.github.pageable.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -37,10 +40,11 @@ public abstract class PageBaseAdapter<T> extends RecyclerView.Adapter implements
     @Override
     public void updateList(List<T> data){
 
-        int index = lists.size() - 1;
-        lists.addAll(index,data);
+        if(data != null){
+            int index = lists.size() - 1;
+            lists.addAll(index,data);
+        }
         notifyDataSetChanged();
-
     }
 
     @NonNull
@@ -64,14 +68,21 @@ public abstract class PageBaseAdapter<T> extends RecyclerView.Adapter implements
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         switch (getItemViewType(position)){
             case VIEW_TYPE_HEADER:
                 onBindViewHolderHeader(holder);
                 break;
             case VIEW_TYPE_ITEM:
-                onBindViewHolderItem(holder,position,getItemData(position));
+                final T item = getItemData(position);
+                onBindViewHolderItem(holder,position,item);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onBindViewHolderItemClick(position,item);
+                    }
+                });
                 break;
             case VIEW_TYPE_FOODER:
                 onBindViewHolderFooder(holder);
@@ -133,4 +144,10 @@ public abstract class PageBaseAdapter<T> extends RecyclerView.Adapter implements
         return hasMore;
     }
 
+    public void startAct(Bundle bundle,Class clazz){
+
+        Intent intent = new Intent(context, clazz);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
 }

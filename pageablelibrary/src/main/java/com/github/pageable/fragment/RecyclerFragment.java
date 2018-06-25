@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.github.pageable.R;
 import com.github.pageable.adapter.DefaultDecoration;
+import com.github.pageable.adapter.DefaultHeadFoodDecoration;
 import com.github.pageable.adapter.PageBaseAdapter;
 import com.github.pageable.view.EmptyRecyclerView;
 
@@ -122,7 +123,7 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
      * @return
      */
     public RecyclerView.ItemDecoration getDivideDecoration(){
-        return new DefaultDecoration(getContext());
+        return new DefaultHeadFoodDecoration(getContext());
     }
     public abstract int getEmptyViewImageResource();
 

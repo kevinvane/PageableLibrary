@@ -16,4 +16,5 @@ public interface PageAdapterInterface<T>{
     RecyclerView.ViewHolder onCreateViewHolderItem(@NonNull ViewGroup parent);
     void onBindViewHolderHeader(@NonNull RecyclerView.ViewHolder holder);
     void onBindViewHolderItem(@NonNull RecyclerView.ViewHolder holder, int position,T item);
+    void onBindViewHolderItemClick(int position,T item);
 }

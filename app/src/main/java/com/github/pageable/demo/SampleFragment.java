@@ -1,7 +1,9 @@
 package com.github.pageable.demo;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.github.pageable.adapter.DefaultHeadFoodDecoration;
 import com.github.pageable.adapter.PageBaseAdapter;
 import com.github.pageable.fragment.PageableFragment;
 import com.github.pageable.model.PageBean;
@@ -17,7 +19,7 @@ public class SampleFragment extends PageableFragment {
     public void onLoadNextPage(int pageNext, int pageCount) {
 
         List<Sample> data = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
 
             Sample sample = new Sample();
             sample.setTitle("test"+pageNext);
@@ -54,12 +56,18 @@ public class SampleFragment extends PageableFragment {
 
     @Override
     public int getEmptyViewImageResource() {
-        return 0;
+        return R.drawable.ic_launcher_background;
     }
 
     @Override
     public void initView(View rootView) {
         super.initView(rootView);
         requestNetData();
+    }
+
+    @Override
+    public RecyclerView.ItemDecoration getDivideDecoration() {
+
+        return new DefaultHeadFoodDecoration(getContext(),R.color.colorAccent);
     }
 }

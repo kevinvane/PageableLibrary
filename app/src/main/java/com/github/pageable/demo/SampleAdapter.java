@@ -37,5 +37,10 @@ public class SampleAdapter extends PageBaseAdapter<Sample>{
         sampleItemHolder.des.setText("position="+position);
     }
 
+    @Override
+    public void onBindViewHolderItemClick(int position, Sample item) {
+
+    }
+
 
 }

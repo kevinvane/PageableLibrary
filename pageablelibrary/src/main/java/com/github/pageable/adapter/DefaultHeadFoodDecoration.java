@@ -10,39 +10,41 @@ import android.view.View;
 import com.github.pageable.R;
 
 
-public class DefaultDecoration extends RecyclerView.ItemDecoration{
+public class DefaultHeadFoodDecoration extends DefaultDecoration{
 
-    protected int dividerHeight;
-    protected int margin_horizontal;
+    public DefaultHeadFoodDecoration(Context context) {
+        super(context);
 
-    protected Paint dividerPaint;
-
-    public DefaultDecoration(Context context) {
-
-        init(context, R.color.colorDecoration);
     }
-    public DefaultDecoration(Context context, int colorId) {
+    public DefaultHeadFoodDecoration(Context context, int colorId) {
+        super(context,colorId);
 
-        init(context,colorId);
     }
 
-    public void init(Context context,int colorId){
-        dividerPaint = new Paint();
-        dividerPaint.setColor(context.getResources().getColor(colorId));
-        dividerHeight = context.getResources().getDimensionPixelSize(R.dimen.default_decoration_height);
-        margin_horizontal = context.getResources().getDimensionPixelSize(R.dimen.default_decoration_height);
-    }
 
+    /**
+     *  getItemOffsets(),可以实现类似padding的效果
+     *
+     * @param outRect
+     * @param view
+     * @param parent
+     * @param state
+     */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
 
-
         //全部Item都有一条分割线
         outRect.bottom = dividerHeight;
-
     }
 
+
+    /**
+     * 可以实现类似绘制背景的效果，内容在上面
+     * @param c
+     * @param parent
+     * @param state
+     */
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
 
@@ -50,8 +52,9 @@ public class DefaultDecoration extends RecyclerView.ItemDecoration{
         int left = margin_horizontal;
         int right = parent.getWidth() - margin_horizontal;
 
-        //全部Item都有一条分割线
-        for (int i = 0; i < childCount; i++) {
+        //除了头尾，其他item绘制分割线
+        for (int i = 1; i < childCount - 1; i++) {
+
             View view = parent.getChildAt(i);
             float top = view.getBottom();
             float bottom = view.getBottom() + dividerHeight;
@@ -59,4 +62,14 @@ public class DefaultDecoration extends RecyclerView.ItemDecoration{
         }
     }
 
+    /**
+     * 可以绘制在内容的上面，覆盖内容
+     * @param c
+     * @param parent
+     * @param state
+     */
+    @Override
+    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
+        super.onDrawOver(c, parent, state);
+    }
 }
