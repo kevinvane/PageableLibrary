@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 
 import com.github.pageable.adapter.PageBaseAdapter;
 
-public class SampleAdapter extends PageBaseAdapter<Sample>{
+public class SamplePageAdapter extends PageBaseAdapter<Sample>{
 
-    public SampleAdapter(Context context) {
+    public SamplePageAdapter(Context context) {
         super(context);
     }
 

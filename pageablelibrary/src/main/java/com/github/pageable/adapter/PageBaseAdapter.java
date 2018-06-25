@@ -12,88 +12,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class PageBaseAdapter<T> extends RecyclerView.Adapter implements PageAdapterInterface<T>{
-
-    public final String TAG = getClass().getName();
-    public Context context;
-    public final static int VIEW_TYPE_HEADER = 0;
-    public final static int VIEW_TYPE_FOODER = 1;
-    public final static int VIEW_TYPE_ITEM = 2;
+public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements PageAdapterInterface{
 
     private boolean hasMore = true;
 
-    public List<T> lists;
-
     public PageBaseAdapter(Context context) {
-       this.context = context;
-       this.lists = new ArrayList<>();
+        super(context);
         onRefresh();
     }
 
     @Override
     public void onRefresh() {
-        lists.clear();
-        lists.add(null);
-        lists.add(null);
+        getLists().clear();
+        getLists().add(null);
+        getLists().add(null);
     }
 
     @Override
     public void updateList(List<T> data){
 
         if(data != null){
-            int index = lists.size() - 1;
-            lists.addAll(index,data);
+            int index = getLists().size() - 1;
+            getLists().addAll(index,data);
         }
         notifyDataSetChanged();
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        RecyclerView.ViewHolder holder;
-        switch (viewType){
-            case VIEW_TYPE_HEADER:
-                holder = onCreateViewHolderHeader(parent);
-                break;
-            default:
-            case VIEW_TYPE_ITEM:
-                holder = onCreateViewHolderItem(parent);
-                break;
-            case VIEW_TYPE_FOODER:
-                holder = onCreateViewHolderFooder(parent);
-                break;
-        }
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-
-        switch (getItemViewType(position)){
-            case VIEW_TYPE_HEADER:
-                onBindViewHolderHeader(holder);
-                break;
-            case VIEW_TYPE_ITEM:
-                final T item = getItemData(position);
-                onBindViewHolderItem(holder,position,item);
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBindViewHolderItemClick(position,item);
-                    }
-                });
-                break;
-            case VIEW_TYPE_FOODER:
-                onBindViewHolderFooder(holder);
-                break;
-        }
-    }
-    private RecyclerView.ViewHolder onCreateViewHolderFooder(@NonNull ViewGroup parent){
+    public RecyclerView.ViewHolder onCreateViewHolderFooder(@NonNull ViewGroup parent){
         return PageableHolder.getViewHolder(context,parent);
     }
 
-    private void onBindViewHolderFooder(@NonNull RecyclerView.ViewHolder holder){
+    @Override
+    public void onBindViewHolderFooder(@NonNull RecyclerView.ViewHolder holder){
         PageableHolder loadMoreHolder = (PageableHolder)holder;
         if(isHasMore()){
             loadMoreHolder.showLoading();
@@ -119,15 +70,6 @@ public abstract class PageBaseAdapter<T> extends RecyclerView.Adapter implements
         return VIEW_TYPE_ITEM;
     }
 
-    @Override
-    public T getItemData(int position) {
-        return lists.get(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return lists.size();
-    }
     /**
      * 返回当item数量为n时，当前是空视图，如有header时，是1.
      * @return
@@ -144,10 +86,4 @@ public abstract class PageBaseAdapter<T> extends RecyclerView.Adapter implements
         return hasMore;
     }
 
-    public void startAct(Bundle bundle,Class clazz){
-
-        Intent intent = new Intent(context, clazz);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-    }
 }

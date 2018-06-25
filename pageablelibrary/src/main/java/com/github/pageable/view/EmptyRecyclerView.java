@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.github.pageable.adapter.BaseAdapter;
 import com.github.pageable.adapter.PageBaseAdapter;
 
 
@@ -45,7 +46,7 @@ public class EmptyRecyclerView extends RecyclerView{
     public void checkIfEmpty() {
         if (emptyView != null && getAdapter() != null) {
             final boolean emptyViewVisible =
-                    getAdapter().getItemCount() <= ((PageBaseAdapter)getAdapter()).getEmptyItemSize();
+                    getAdapter().getItemCount() <= ((BaseAdapter)getAdapter()).getEmptyItemSize();
             emptyView.setVisibility(emptyViewVisible ? VISIBLE : GONE);
             setVisibility(emptyViewVisible ? GONE : VISIBLE);
         }

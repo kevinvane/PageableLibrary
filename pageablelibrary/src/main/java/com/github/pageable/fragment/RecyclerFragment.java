@@ -12,23 +12,26 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.github.pageable.R;
+import com.github.pageable.adapter.BaseAdapter;
 import com.github.pageable.adapter.DefaultDecoration;
 import com.github.pageable.adapter.DefaultHeadFoodDecoration;
-import com.github.pageable.adapter.PageBaseAdapter;
 import com.github.pageable.view.EmptyRecyclerView;
 
 public abstract class RecyclerFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private View mRootView;
     SwipeRefreshLayout swipeLayout;
+    private BaseAdapter mAdapter;
     protected abstract void requestNetData();
-    protected abstract int getPageCount();
-    protected abstract int getPageStart();
-
-    public abstract PageBaseAdapter getAdapterInstance();
+    public abstract BaseAdapter getAdapterInstance();
+    public abstract int getEmptyViewImageResource();
 
     private EmptyRecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
+
+    public BaseAdapter getmAdapter() {
+        return mAdapter;
+    }
 
     public EmptyRecyclerView getRecyclerView() {
         return recyclerView;
@@ -72,8 +75,8 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         if(getDivideDecoration() != null){
             recyclerView.addItemDecoration(getDivideDecoration());
         }
-
-        recyclerView.setAdapter(getAdapterInstance());
+        mAdapter = getAdapterInstance();
+        recyclerView.setAdapter(mAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
     public LinearLayoutManager getLinearLayoutManager() {
@@ -123,8 +126,7 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
      * @return
      */
     public RecyclerView.ItemDecoration getDivideDecoration(){
-        return new DefaultHeadFoodDecoration(getContext());
+        return new DefaultDecoration(getContext());
     }
-    public abstract int getEmptyViewImageResource();
 
 }

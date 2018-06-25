@@ -11,15 +11,15 @@ import com.github.pageable.model.PageBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SampleFragment extends PageableFragment {
+public class SamplePageFragment extends PageableFragment {
 
-   private SampleAdapter adapter;
+   private SamplePageAdapter adapter;
 
     @Override
     public void onLoadNextPage(int pageNext, int pageCount) {
 
         List<Sample> data = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < getPageCount(); i++) {
 
             Sample sample = new Sample();
             sample.setTitle("test"+pageNext);
@@ -29,7 +29,7 @@ public class SampleFragment extends PageableFragment {
         adapter.updateList(data);
 
         PageBean pb = new PageBean();
-        pb.setLast(pageNext == 0);
+        pb.setLast(pageNext == 5);
 
         onLoadMoreCheck(pb);
 
@@ -49,7 +49,7 @@ public class SampleFragment extends PageableFragment {
     @Override
     public PageBaseAdapter getAdapterInstance() {
         if(adapter == null){
-            adapter = new SampleAdapter(getContext());
+            adapter = new SamplePageAdapter(getContext());
         }
         return adapter;
     }
