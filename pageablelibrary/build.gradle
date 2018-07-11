@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.0.4"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -23,7 +23,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    android.libraryVariants.all {
+        variant ->
+            variant.outputs.all {
+                output -> output.outputFileName = "pageablelibrary-release-v" + defaultConfig.versionName + ".aar"
+            }
+    }
 }
 
 dependencies {
@@ -40,7 +45,7 @@ dependencies {
 
 // 项目引用的版本号，比如 implementation 'com.kevinvane:demo:1.0.1'
 group = "com.kevinwen"
-version = "1.0.2"
+version = "1.0.4"
 
 def siteUrl = 'https://github.com/kevinvane/PageableLibrary' // 项目主页。
 def gitUrl = 'git@github.com:kevinvane/PageableLibrary.git' // Git仓库的url。

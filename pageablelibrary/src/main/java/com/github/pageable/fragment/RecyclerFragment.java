@@ -37,13 +37,16 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         return recyclerView;
     }
 
+    public int getLayout(){
+        return R.layout.layout_page;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if(mRootView == null){
 
-            mRootView = inflater.inflate(R.layout.layout_page, container, false);
+            mRootView = inflater.inflate(getLayout(), container, false);
             initView(mRootView);
         }
         ViewGroup mViewGroup = (ViewGroup)mRootView.getParent();
