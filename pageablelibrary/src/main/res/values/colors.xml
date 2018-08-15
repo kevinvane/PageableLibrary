@@ -11,6 +11,7 @@
 
     <color name="colorDecoration">#f0f0f0</color>
     <color name="colorSwipeRefresh">@color/colorAccent</color>
+    <color name="colorAct">#ffffff</color>
 
 
 </resources>
