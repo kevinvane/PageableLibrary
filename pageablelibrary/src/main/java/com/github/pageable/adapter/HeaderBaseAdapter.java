@@ -21,6 +21,11 @@ public abstract class HeaderBaseAdapter<T> extends BaseAdapter<T> implements Hea
     }
 
     @Override
+    public void clearList() {
+        getLists().clear();
+        getLists().add(null);
+    }
+    @Override
     public void updateList(List<T> data) {
 
         getLists().clear();

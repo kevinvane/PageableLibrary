@@ -20,12 +20,15 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
         super(context);
         onRefresh();
     }
-
     @Override
-    public void onRefresh() {
+    public void clearList() {
         getLists().clear();
         getLists().add(null);
         getLists().add(null);
+    }
+    @Override
+    public void onRefresh() {
+        clearList();
     }
 
     @Override

@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.pageable.R;
 import com.github.pageable.adapter.BaseAdapter;
 import com.github.pageable.adapter.DefaultDecoration;
 import com.github.pageable.adapter.DefaultHeadFoodDecoration;
 import com.github.pageable.view.EmptyRecyclerView;
+import com.github.pageable.view.LinearLayoutWrapManager;
 
 public abstract class RecyclerFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -27,7 +29,7 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
     public abstract int getEmptyViewImageResource();
 
     private EmptyRecyclerView recyclerView;
-    private LinearLayoutManager linearLayoutManager;
+    private LinearLayoutWrapManager linearLayoutManager;
 
     public BaseAdapter getmAdapter() {
         return mAdapter;
@@ -68,10 +70,15 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         View emptyView = rootView.findViewById(R.id.emptyView);
 
         ImageView emptyViewImage = rootView.findViewById(R.id.emptyViewImage);
-        if(emptyViewImage != null)emptyViewImage.setImageResource(getEmptyViewImageResource());
+        if(emptyViewImage != null){
+            emptyViewImage.setImageResource(getEmptyViewImageResource());
+        }
+        TextView emptyViewText = rootView.findViewById(R.id.emptyViewText);
+        if(emptyViewText != null){
+            emptyViewText.setText(getEmptyViewTextResource());
+        }
 
-
-        linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager = new LinearLayoutWrapManager(getContext(),LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setEmptyView(emptyView);
 
@@ -81,6 +88,10 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         mAdapter = getAdapterInstance();
         recyclerView.setAdapter(mAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    public int getEmptyViewTextResource(){
+        return R.string.empty;
     }
     public LinearLayoutManager getLinearLayoutManager() {
         return linearLayoutManager;

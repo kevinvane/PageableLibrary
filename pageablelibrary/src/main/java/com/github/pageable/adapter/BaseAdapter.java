@@ -26,6 +26,11 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter implements Bas
     }
 
     @Override
+    public void clearList() {
+        lists.clear();
+    }
+
+    @Override
     public void updateList(List<T> data) {
 
         lists.clear();
