@@ -62,8 +62,8 @@ public abstract class PageableFragment extends RecyclerFragment{
     @Override
     public void onRefresh() {
 
-        PageBaseAdapter adapter = getmAdapter();
-        adapter.onRefresh();
+        //PageBaseAdapter adapter = getmAdapter();
+        //adapter.onRefresh();
         resetLoadMore();
         requestNetData();
     }

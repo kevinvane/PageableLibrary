@@ -15,7 +15,7 @@ public abstract class RecyclerOnScrollListener extends RecyclerView.OnScrollList
     //给外部调用，标志是否还有数据
     private boolean hasMore = true;
 
-    //public abstract boolean checkCanDoRefresh();
+    public abstract boolean checkCanDoRefresh();
     public abstract void onBottomLoadMore(int pagination, int pageSize);
 
 

@@ -28,12 +28,14 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
     }
     @Override
     public void onRefresh() {
-        clearList();
+        //clearList();
     }
 
-    @Override
-    public void updateList(List<T> data){
+    public void updateList(int page,List<T> data){
 
+        if(page == 0){
+            clearList();
+        }
         if(data != null){
             int index = getLists().size() - 1;
             getLists().addAll(index,data);

@@ -108,7 +108,9 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         }
     }
 
-
+    public boolean isRefreshing(){
+        return swipeLayout.isRefreshing();
+    }
 
     /**
      * 解决和swipe手势冲突

@@ -74,16 +74,17 @@ public abstract class BottomOnScrollListener extends RecyclerOnScrollListener {
             handler.removeCallbacksAndMessages(null);
         }
     }
-    //public boolean checkCanDoRefresh() {
-    //    if(mLinearLayoutManager.getItemCount() == 0) return true;
-    //    int firstVisiblePosition = mLinearLayoutManager.findFirstVisibleItemPosition();
-    //    if(firstVisiblePosition == 0) {
-    //        View firstVisibleView = mLinearLayoutManager.findViewByPosition(firstVisiblePosition);
-    //        int top = firstVisibleView.getTop();
-    //        return top >= 0;
-    //    } else {
-    //        return false;
-    //    }
-    //
-    //}
+    @Override
+    public boolean checkCanDoRefresh() {
+        if(mLinearLayoutManager.getItemCount() == 0) return true;
+        int firstVisiblePosition = mLinearLayoutManager.findFirstVisibleItemPosition();
+        if(firstVisiblePosition == 0) {
+            View firstVisibleView = mLinearLayoutManager.findViewByPosition(firstVisiblePosition);
+            int top = firstVisibleView.getTop();
+            return top >= 0;
+        } else {
+            return false;
+        }
+
+    }
 }
