@@ -29,6 +29,13 @@ public class PageBean implements Serializable {
     private int size;
     private int number;
 
+    public PageBean() {
+    }
+
+    public PageBean(boolean last) {
+        this.last = last;
+    }
+
     public PageableBean getPageable() {
         return pageable;
     }

@@ -15,6 +15,15 @@ import java.util.List;
 public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements PageAdapterInterface{
 
     private boolean hasMore = true;
+    private int pageStart = 0;
+
+    public int getPageStart() {
+        return pageStart;
+    }
+
+    public void setPageStart(int pageStart) {
+        this.pageStart = pageStart;
+    }
 
     public PageBaseAdapter(Context context) {
         super(context);
@@ -33,7 +42,7 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
 
     public void updateList(int page,List<T> data){
 
-        if(page == 0){
+        if(page == getPageStart()){
             clearList();
         }
         if(data != null){
@@ -42,7 +51,14 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
         }
         notifyDataSetChanged();
     }
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolderHeader(@NonNull ViewGroup viewGroup) {
+        return EmptyHolder.getHolder(viewGroup);
+    }
+    @Override
+    public void onBindViewHolderHeader(@NonNull RecyclerView.ViewHolder viewHolder) {
 
+    }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolderFooder(@NonNull ViewGroup parent){
         return PageableHolder.getViewHolder(context,parent);
