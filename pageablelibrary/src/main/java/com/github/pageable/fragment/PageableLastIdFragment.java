@@ -10,7 +10,7 @@
 ///**
 // * 适合以最后一个id请求下一页数据的API，本类没调试。
 // */
-//public abstract class PageableLastIdFragment extends RecyclerFragment{
+//public abstract class PageableLastIdFragment extends EmptyRecyclerFragment{
 //
 //    private BottomOnScrollListener bottomListener;
 //

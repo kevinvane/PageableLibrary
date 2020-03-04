@@ -11,7 +11,7 @@ import com.github.pageable.model.PageBean;
 /**
  * 适合以 页码 来请求下一页的API。
  */
-public abstract class PageableFragment extends RecyclerFragment{
+public abstract class PageableFragment extends EmptyRecyclerFragment {
 
     private BottomOnScrollListener bottomListener;
 

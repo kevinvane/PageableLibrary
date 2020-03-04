@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,17 +17,24 @@ import android.widget.TextView;
 import com.github.pageable.R;
 import com.github.pageable.adapter.BaseAdapter;
 import com.github.pageable.adapter.DefaultDecoration;
-import com.github.pageable.adapter.DefaultHeadFoodDecoration;
 import com.github.pageable.view.EmptyRecyclerView;
 import com.github.pageable.view.LinearLayoutWrapManager;
 
-public abstract class RecyclerFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     private View mRootView;
     SwipeRefreshLayout swipeLayout;
     private BaseAdapter mAdapter;
+
+    /**
+     * 请求网络数据
+     */
     protected abstract void requestNetData();
     public abstract BaseAdapter getAdapterInstance();
+    /**
+     * 空视图显示的图片资源
+     * @return image
+     */
     public abstract int getEmptyViewImageResource();
 
     private EmptyRecyclerView recyclerView;
@@ -39,9 +48,14 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         return recyclerView;
     }
 
+    /**
+     * 默认布局文件，重写方法使用自定义的布局
+     * @return layout id
+     */
     public int getLayout(){
-        return R.layout.layout_page;
+        return R.layout.layout_page_library;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,14 +82,23 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
         View emptyView = rootView.findViewById(R.id.emptyView);
-
+        emptyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onEmptyViewClick();
+            }
+        });
         ImageView emptyViewImage = rootView.findViewById(R.id.emptyViewImage);
         if(emptyViewImage != null){
             emptyViewImage.setImageResource(getEmptyViewImageResource());
         }
         TextView emptyViewText = rootView.findViewById(R.id.emptyViewText);
         if(emptyViewText != null){
-            emptyViewText.setText(getEmptyViewTextResource());
+            if(!TextUtils.isEmpty(getEmptyViewTextString())){
+                emptyViewText.setText(getEmptyViewTextString());
+            }else{
+                emptyViewText.setText(getEmptyViewTextResource());
+            }
         }
 
         linearLayoutManager = new LinearLayoutWrapManager(getContext(),LinearLayoutManager.VERTICAL, false);
@@ -90,10 +113,35 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
+    /**
+     * 重写方法，空视图点击事件
+     */
+    public void onEmptyViewClick(){
+
+        //TODO 跳转
+        Log.d("AA","onEmptyViewClick");
+    }
+
+    /**
+     * 重写方法，显示空视图的文字，优先级高
+     * @return string
+     */
+    public String getEmptyViewTextString(){
+        return "没有数据啦！";
+    }
+    /**
+     * 重写方法，显示空视图的文字，优先级低
+     * @return string.xml的资源
+     */
     public int getEmptyViewTextResource(){
         return R.string.empty;
     }
-    public LinearLayoutManager getLinearLayoutManager() {
+
+    /**
+     * 仅支持 LinearLayoutWrapManager
+     * @return LinearLayoutWrapManager
+     */
+    public LinearLayoutWrapManager getLinearLayoutManager() {
         return linearLayoutManager;
     }
 
@@ -138,8 +186,8 @@ public abstract class RecyclerFragment extends Fragment implements SwipeRefreshL
 
 
     /**
-     *
-     * @return
+     * 重写方法，返回自定义的ItemDecoration
+     * @return ItemDecoration
      */
     public RecyclerView.ItemDecoration getDivideDecoration(){
         return new DefaultDecoration(getContext());

@@ -1,8 +1,11 @@
 package com.github.pageable.demo;
 
+import android.content.Context;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.github.pageable.adapter.DefaultHeadFoodDecoration;
 import com.github.pageable.adapter.PageBaseAdapter;
@@ -12,7 +15,11 @@ import com.github.pageable.model.PageBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SamplePageFragment extends PageableFragment {
+
+/**
+ * 分页
+ */
+public class FragmentPageableSample extends PageableFragment {
 
    private SamplePageAdapter adapter;
     private Handler handler = new Handler();
@@ -23,10 +30,10 @@ public class SamplePageFragment extends PageableFragment {
             @Override
             public void run() {
 
-                List<Sample> data = new ArrayList<>();
+                List<DataSample> data = new ArrayList<>();
                 for (int i = 0; i < getPageCount(); i++) {
 
-                    Sample sample = new Sample();
+                    DataSample sample = new DataSample();
                     sample.setTitle("test"+pageNext);
                     sample.setDes("des"+i);
                     data.add(sample);
@@ -74,4 +81,45 @@ public class SamplePageFragment extends PageableFragment {
 
         return new DefaultHeadFoodDecoration(getContext(),R.color.colorAccent);
     }
+
+
+
+    class SamplePageAdapter extends PageBaseAdapter<DataSample>{
+
+        public SamplePageAdapter(Context context) {
+            super(context);
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolderHeader(@NonNull ViewGroup parent) {
+            return ItemHolderSample.getHeadHolder(context,parent);
+        }
+
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolderItem(@NonNull ViewGroup parent) {
+            return ItemHolderSample.getViewHolder(context,parent);
+        }
+
+        @Override
+        public void onBindViewHolderHeader(@NonNull RecyclerView.ViewHolder holder) {
+            ItemHolderSample sampleItemHolder = (ItemHolderSample)holder;
+            sampleItemHolder.title.setText("头部");
+        }
+
+        @Override
+        public void onBindViewHolderItem(@NonNull RecyclerView.ViewHolder holder, int position, DataSample item) {
+
+            ItemHolderSample sampleItemHolder = (ItemHolderSample)holder;
+            sampleItemHolder.title.setText(item.getTitle());
+            sampleItemHolder.des.setText("position="+position);
+        }
+
+        @Override
+        public void onBindViewHolderItemClick(int position, DataSample item) {
+
+        }
+
+
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.github.pageable.demo;
 
-public class Sample {
+public class DataSample {
 
     private String title;
     private String des;

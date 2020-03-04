@@ -37,6 +37,39 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter implements Bas
         lists.addAll(data);
         notifyDataSetChanged();
     }
+
+    @Override
+    public void removeItem(int position) {
+        if(position >=0 && position < getItemCount()){
+            lists.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    @Override
+    public void addItem(T item) {
+
+        if(!lists.contains(item)){
+            lists.add(item);
+            notifyItemInserted(getItemCount() -1);
+        }
+    }
+
+    @Override
+    public void updateItem(int position,T item) {
+
+        if(position >=0 && position < getItemCount()){
+            lists.set(position,item);
+            notifyItemChanged(position);
+        }
+    }
+
+    @Override
+    public int findItem(T item){
+
+        return lists.indexOf(item);
+    }
+
     public List<T> getLists() {
         return lists;
     }
