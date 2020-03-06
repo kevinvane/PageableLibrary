@@ -1,4 +1,4 @@
-package com.github.pageable.adapter;
+package com.github.pageable.adapter.holder;
 
 
 import android.content.Context;

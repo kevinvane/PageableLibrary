@@ -3,7 +3,7 @@
 //import android.util.Log;
 //import android.view.View;
 //
-//import com.github.pageable.adapter.PageBaseAdapter;
+//import com.github.pageable.adapter.PageHeaderBaseAdapter;
 //import com.github.pageable.listener.BottomOnScrollListener;
 //
 //
@@ -78,7 +78,7 @@
 //
 //    public void checkIsHasMore(int size ,int lastId){
 //
-//        PageBaseAdapter adapter = getAdapterInstance();
+//        PageHeaderBaseAdapter adapter = getAdapterInstance();
 //
 //        if(size >= bottomListener.getPageSize()){
 //            //int lastId = list.get(list.size() -1).getId();

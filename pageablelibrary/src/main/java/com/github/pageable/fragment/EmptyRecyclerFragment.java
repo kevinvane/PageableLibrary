@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.pageable.R;
-import com.github.pageable.adapter.BaseAdapter;
-import com.github.pageable.adapter.DefaultDecoration;
+import com.github.pageable.adapter.EmptyBaseAdapter;
+import com.github.pageable.adapter.decoration.DefaultDecoration;
 import com.github.pageable.view.EmptyRecyclerView;
 import com.github.pageable.view.LinearLayoutWrapManager;
 
@@ -24,13 +24,13 @@ public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRef
 
     private View mRootView;
     SwipeRefreshLayout swipeLayout;
-    private BaseAdapter mAdapter;
+    private EmptyBaseAdapter mAdapter;
 
     /**
      * 请求网络数据
      */
     protected abstract void requestNetData();
-    public abstract BaseAdapter getAdapterInstance();
+    public abstract EmptyBaseAdapter getAdapterInstance();
     /**
      * 空视图显示的图片资源
      * @return image
@@ -40,7 +40,7 @@ public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRef
     private EmptyRecyclerView recyclerView;
     private LinearLayoutWrapManager linearLayoutManager;
 
-    public BaseAdapter getmAdapter() {
+    public EmptyBaseAdapter getmAdapter() {
         return mAdapter;
     }
 

@@ -1,4 +1,4 @@
-package com.github.pageable.adapter;
+package com.github.pageable.adapter.decoration;
 
 import android.content.Context;
 import android.graphics.Canvas;

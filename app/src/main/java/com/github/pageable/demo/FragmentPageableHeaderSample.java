@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.pageable.adapter.DefaultHeadFoodDecoration;
-import com.github.pageable.adapter.PageBaseAdapter;
+import com.github.pageable.adapter.decoration.DefaultHeadFooterDecoration;
+import com.github.pageable.adapter.PageHeaderBaseAdapter;
 import com.github.pageable.fragment.PageableFragment;
 import com.github.pageable.model.PageBean;
 
@@ -17,11 +17,11 @@ import java.util.List;
 
 
 /**
- * 分页
+ * 分页，有Header
  */
-public class FragmentPageableSample extends PageableFragment {
+public class FragmentPageableHeaderSample extends PageableFragment {
 
-   private SamplePageAdapter adapter;
+   private SamplePageHeaderAdapter adapter;
     private Handler handler = new Handler();
     @Override
     public void onLoadNextPage(final int pageNext, int pageCount) {
@@ -58,9 +58,9 @@ public class FragmentPageableSample extends PageableFragment {
         return 0;
     }
     @Override
-    public PageBaseAdapter getAdapterInstance() {
+    public PageHeaderBaseAdapter getAdapterInstance() {
         if(adapter == null){
-            adapter = new SamplePageAdapter(getContext());
+            adapter = new SamplePageHeaderAdapter(getContext());
         }
         return adapter;
     }
@@ -79,14 +79,13 @@ public class FragmentPageableSample extends PageableFragment {
     @Override
     public RecyclerView.ItemDecoration getDivideDecoration() {
 
-        return new DefaultHeadFoodDecoration(getContext(),R.color.colorAccent);
+        return new DefaultHeadFooterDecoration(getContext(),R.color.colorAccent);
     }
 
 
+    class SamplePageHeaderAdapter extends PageHeaderBaseAdapter<DataSample> {
 
-    class SamplePageAdapter extends PageBaseAdapter<DataSample>{
-
-        public SamplePageAdapter(Context context) {
+        public SamplePageHeaderAdapter(Context context) {
             super(context);
         }
 
@@ -94,17 +93,18 @@ public class FragmentPageableSample extends PageableFragment {
         public RecyclerView.ViewHolder onCreateViewHolderHeader(@NonNull ViewGroup parent) {
             return ItemHolderSample.getHeadHolder(context,parent);
         }
+        @Override
+        public void onBindViewHolderHeader(@NonNull RecyclerView.ViewHolder holder) {
+            ItemHolderSample sampleItemHolder = (ItemHolderSample)holder;
+            sampleItemHolder.title.setText("头部");
+        }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolderItem(@NonNull ViewGroup parent) {
             return ItemHolderSample.getViewHolder(context,parent);
         }
 
-        @Override
-        public void onBindViewHolderHeader(@NonNull RecyclerView.ViewHolder holder) {
-            ItemHolderSample sampleItemHolder = (ItemHolderSample)holder;
-            sampleItemHolder.title.setText("头部");
-        }
+
 
         @Override
         public void onBindViewHolderItem(@NonNull RecyclerView.ViewHolder holder, int position, DataSample item) {

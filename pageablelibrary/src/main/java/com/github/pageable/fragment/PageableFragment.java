@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.github.pageable.adapter.DefaultHeadFoodDecoration;
-import com.github.pageable.adapter.PageBaseAdapter;
+import com.github.pageable.adapter.PageHeaderBaseAdapter;
+import com.github.pageable.adapter.decoration.DefaultHeadFooterDecoration;
 import com.github.pageable.listener.BottomOnScrollListener;
 import com.github.pageable.model.PageBean;
 /**
@@ -22,8 +22,8 @@ public abstract class PageableFragment extends EmptyRecyclerFragment {
     //private final int PAGE_START = 0;
 
 
-    public PageBaseAdapter getmAdapter() {
-        return (PageBaseAdapter)super.getmAdapter();
+    public PageHeaderBaseAdapter getmAdapter() {
+        return (PageHeaderBaseAdapter)super.getmAdapter();
     }
 
     /**
@@ -32,7 +32,7 @@ public abstract class PageableFragment extends EmptyRecyclerFragment {
      */
     public void onLoadMoreCheck(PageBean pageBean){
 
-        PageBaseAdapter adapter = getmAdapter();
+        PageHeaderBaseAdapter adapter = getmAdapter();
         boolean more = (pageBean != null && !pageBean.isLast());
         setHasMore(more);
         adapter.setHasMore(more);
@@ -62,7 +62,7 @@ public abstract class PageableFragment extends EmptyRecyclerFragment {
     @Override
     public void onRefresh() {
 
-        //PageBaseAdapter adapter = getmAdapter();
+        //PageHeaderBaseAdapter adapter = getmAdapter();
         //adapter.onRefresh();
         resetLoadMore();
         requestNetData();
@@ -90,7 +90,7 @@ public abstract class PageableFragment extends EmptyRecyclerFragment {
 
     @Override
     public RecyclerView.ItemDecoration getDivideDecoration(){
-        return new DefaultHeadFoodDecoration(getContext());
+        return new DefaultHeadFooterDecoration(getContext());
     }
     @Override
     public void onDestroyView() {

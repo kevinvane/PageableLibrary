@@ -1,18 +1,16 @@
 package com.github.pageable.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
+import com.github.pageable.adapter.holder.PageableHolder;
+
 import java.util.List;
 
 
-public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements PageAdapterInterface{
+public abstract class PageHeaderBaseAdapter<T> extends HeaderBaseAdapter<T> implements PageAdapterInterface{
 
     private boolean hasMore = true;
     private int pageStart = 0;
@@ -25,7 +23,7 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
         this.pageStart = pageStart;
     }
 
-    public PageBaseAdapter(Context context) {
+    public PageHeaderBaseAdapter(Context context) {
         super(context);
         onRefresh();
     }
@@ -51,21 +49,14 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
         }
         notifyDataSetChanged();
     }
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolderHeader(@NonNull ViewGroup viewGroup) {
-        return EmptyHolder.getHolder(viewGroup);
-    }
-    @Override
-    public void onBindViewHolderHeader(@NonNull RecyclerView.ViewHolder viewHolder) {
 
-    }
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolderFooder(@NonNull ViewGroup parent){
+    public RecyclerView.ViewHolder onCreateViewHolderFooter(@NonNull ViewGroup parent){
         return PageableHolder.getViewHolder(context,parent);
     }
 
     @Override
-    public void onBindViewHolderFooder(@NonNull RecyclerView.ViewHolder holder){
+    public void onBindViewHolderFooter(@NonNull RecyclerView.ViewHolder holder){
         PageableHolder loadMoreHolder = (PageableHolder)holder;
         if(isHasMore()){
             loadMoreHolder.showLoading();
@@ -86,7 +77,7 @@ public abstract class PageBaseAdapter<T> extends HeaderBaseAdapter<T> implements
         if(position == 0){
             return VIEW_TYPE_HEADER;
         }else if(position == getItemCount()-1){
-            return VIEW_TYPE_FOODER;
+            return VIEW_TYPE_FOOTER;
         }
         return VIEW_TYPE_ITEM;
     }

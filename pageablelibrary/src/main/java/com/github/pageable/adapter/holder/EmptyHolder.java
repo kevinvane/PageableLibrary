@@ -1,4 +1,4 @@
-package com.github.pageable.adapter;
+package com.github.pageable.adapter.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -1,22 +1,19 @@
-package com.github.pageable.adapter;
+package com.github.pageable.adapter.decoration;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.github.pageable.R;
 
+public class DefaultHeadFooterDecoration extends DefaultDecoration{
 
-public class DefaultHeadFoodDecoration extends DefaultDecoration{
-
-    public DefaultHeadFoodDecoration(Context context) {
+    public DefaultHeadFooterDecoration(Context context) {
         super(context);
 
     }
-    public DefaultHeadFoodDecoration(Context context, int colorId) {
+    public DefaultHeadFooterDecoration(Context context, int colorId) {
         super(context,colorId);
 
     }

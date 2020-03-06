@@ -3,11 +3,10 @@ package com.github.pageable.demo;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.pageable.adapter.BaseAdapter;
+import com.github.pageable.adapter.EmptyBaseAdapter;
 import com.github.pageable.fragment.EmptyRecyclerFragment;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class FragmentEmptyRecyclerSample extends EmptyRecyclerFragment {
     }
 
     @Override
-    public BaseAdapter getAdapterInstance() {
+    public EmptyBaseAdapter getAdapterInstance() {
         return new SampleBaseAdapter(getContext());
     }
 
@@ -66,7 +65,7 @@ public class FragmentEmptyRecyclerSample extends EmptyRecyclerFragment {
     }
 
 
-    class SampleBaseAdapter extends BaseAdapter<DataSample> {
+    class SampleBaseAdapter extends EmptyBaseAdapter<DataSample> {
 
         public SampleBaseAdapter(Context context) {
             super(context);

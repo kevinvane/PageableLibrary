@@ -6,12 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.pageable.adapter.holder.EmptyHolder;
+
 import java.util.List;
 
-public abstract class HeaderBaseAdapter<T> extends BaseAdapter<T> implements HeaderBaseAdapterInterface<T>{
+public abstract class HeaderBaseAdapter<T> extends EmptyBaseAdapter<T> implements HeaderBaseAdapterInterface<T>{
 
     public final static int VIEW_TYPE_HEADER = 0;
-    public final static int VIEW_TYPE_FOODER = 1;
+    public final static int VIEW_TYPE_FOOTER = 1;
     public final static int VIEW_TYPE_ITEM = 2;
 
 
@@ -46,8 +48,8 @@ public abstract class HeaderBaseAdapter<T> extends BaseAdapter<T> implements Hea
             case VIEW_TYPE_ITEM:
                 holder = onCreateViewHolderItem(parent);
                 break;
-            case VIEW_TYPE_FOODER:
-                holder = onCreateViewHolderFooder(parent);
+            case VIEW_TYPE_FOOTER:
+                holder = onCreateViewHolderFooter(parent);
                 break;
         }
         return holder;
@@ -69,8 +71,8 @@ public abstract class HeaderBaseAdapter<T> extends BaseAdapter<T> implements Hea
                     }
                 });
                 break;
-            case VIEW_TYPE_FOODER:
-                onBindViewHolderFooder(holder);
+            case VIEW_TYPE_FOOTER:
+                onBindViewHolderFooter(holder);
                 break;
         }
     }
@@ -88,11 +90,18 @@ public abstract class HeaderBaseAdapter<T> extends BaseAdapter<T> implements Hea
         return 1;
     }
 
-    public RecyclerView.ViewHolder onCreateViewHolderFooder(@NonNull ViewGroup parent){
+
+    /**
+     * Footder不作为abstract方法，主要是Footder不是必须的，只有分页的情况才用到，所以不强制使用
+     * 需要用时，重写方法
+     * @param parent
+     * @return
+     */
+    public RecyclerView.ViewHolder onCreateViewHolderFooter(@NonNull ViewGroup parent){
         //等待被分页子类重写
-        return null;
+        return EmptyHolder.getHolder(parent);
     }
-    public void onBindViewHolderFooder(@NonNull RecyclerView.ViewHolder holder){
+    public void onBindViewHolderFooter(@NonNull RecyclerView.ViewHolder holder){
         //等待被分页子类重写
     }
 

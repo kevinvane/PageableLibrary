@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.pageable.adapter.BaseAdapter;
+import com.github.pageable.adapter.EmptyBaseAdapter;
 import com.github.pageable.adapter.HeaderBaseAdapter;
 import com.github.pageable.fragment.EmptyRecyclerFragment;
 
@@ -42,7 +42,7 @@ public class FragmentEmptyRecyclerHeadSample extends EmptyRecyclerFragment {
     }
 
     @Override
-    public BaseAdapter getAdapterInstance() {
+    public EmptyBaseAdapter getAdapterInstance() {
         return new SampleBaseHeadAdapter(getContext());
     }
 
