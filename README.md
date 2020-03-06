@@ -5,7 +5,7 @@
 
 #### jcenter()
 ```
-    implementation 'com.kevinwen:pageablelibrary:x.x.x@aar'
+    implementation 'com.kevinwen:pageablelibrary:1.0.6@aar'
 ```
 
 #### Android Sdk Version
