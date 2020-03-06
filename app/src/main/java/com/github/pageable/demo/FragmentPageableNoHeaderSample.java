@@ -60,7 +60,7 @@ public class FragmentPageableNoHeaderSample extends PageableFragment {
         return 0;
     }
     @Override
-    public PageHeaderBaseAdapter getAdapterInstance() {
+    public PageHeaderBaseAdapter newEmptyAdapterInstance() {
         if(adapter == null){
             adapter = new SamplePageNoHeaderAdapter(getContext());
         }

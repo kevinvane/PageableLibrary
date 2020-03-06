@@ -78,7 +78,7 @@
 //
 //    public void checkIsHasMore(int size ,int lastId){
 //
-//        PageHeaderBaseAdapter adapter = getAdapterInstance();
+//        PageHeaderBaseAdapter adapter = newEmptyAdapterInstance();
 //
 //        if(size >= bottomListener.getPageSize()){
 //            //int lastId = list.get(list.size() -1).getId();

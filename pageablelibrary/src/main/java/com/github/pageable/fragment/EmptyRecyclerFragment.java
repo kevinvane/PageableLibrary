@@ -30,7 +30,7 @@ public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRef
      * 请求网络数据
      */
     protected abstract void requestNetData();
-    public abstract EmptyBaseAdapter getAdapterInstance();
+    public abstract EmptyBaseAdapter newEmptyAdapterInstance();
     /**
      * 空视图显示的图片资源
      * @return image
@@ -108,7 +108,7 @@ public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRef
         if(getDivideDecoration() != null){
             recyclerView.addItemDecoration(getDivideDecoration());
         }
-        mAdapter = getAdapterInstance();
+        mAdapter = newEmptyAdapterInstance();
         recyclerView.setAdapter(mAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }

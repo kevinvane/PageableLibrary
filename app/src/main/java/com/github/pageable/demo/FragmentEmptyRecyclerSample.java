@@ -41,7 +41,7 @@ public class FragmentEmptyRecyclerSample extends EmptyRecyclerFragment {
     }
 
     @Override
-    public EmptyBaseAdapter getAdapterInstance() {
+    public EmptyBaseAdapter newEmptyAdapterInstance() {
         return new SampleBaseAdapter(getContext());
     }
 
