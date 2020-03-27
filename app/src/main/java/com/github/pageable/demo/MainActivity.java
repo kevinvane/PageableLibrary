@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(
                 R.id.container,
-                new FragmentPageableNoHeaderSample()
+                new FragmentEmptyRecyclerSample()
         ).commit();
     }
 }

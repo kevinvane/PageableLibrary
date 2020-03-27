@@ -22,7 +22,7 @@ public class FragmentEmptyRecyclerSample extends EmptyRecyclerFragment {
     protected void requestNetData() {
 
         List<DataSample> data = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 5; i++) {
 
             DataSample sample = new DataSample();
             sample.setTitle("test");
@@ -78,10 +78,17 @@ public class FragmentEmptyRecyclerSample extends EmptyRecyclerFragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
             ItemHolderSample sampleItemHolder = (ItemHolderSample)holder;
             sampleItemHolder.title.setText(getItemData(position).getTitle());
             sampleItemHolder.des.setText(getItemData(position).getDes());
+            sampleItemHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    removeItem(position);
+                }
+            });
         }
     }
 
