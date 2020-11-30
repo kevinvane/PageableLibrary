@@ -1,11 +1,12 @@
 package com.github.pageable.fragment;
 
 import android.os.Bundle;
-import android.support.design.widget.AppBarLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.github.pageable.adapter.EmptyBaseAdapter;
 import com.github.pageable.adapter.decoration.DefaultDecoration;
 import com.github.pageable.view.EmptyRecyclerView;
 import com.github.pageable.view.LinearLayoutWrapManager;
+import com.google.android.material.appbar.AppBarLayout;
 
 public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -101,7 +103,7 @@ public abstract class EmptyRecyclerFragment extends Fragment implements SwipeRef
             }
         }
 
-        linearLayoutManager = new LinearLayoutWrapManager(getContext(),LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager = new LinearLayoutWrapManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setEmptyView(emptyView);
 

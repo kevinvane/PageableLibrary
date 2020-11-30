@@ -1,6 +1,6 @@
 package com.github.pageable.listener;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 
